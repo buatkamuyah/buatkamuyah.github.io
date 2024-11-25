@@ -1,2 +1,3 @@
 # buatkamuyah.github.io
-mode sad
+
+# APA PUN MASALAH NYA , UNTUNG GW GK ADA MASALAH 
