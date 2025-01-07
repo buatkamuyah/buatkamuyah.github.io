@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>lope</title>
+  <style>
+  	* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  background: black;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+  overflow: hidden;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 100dvmin;
+  aspect-ratio: 1;
+  z-index: 1;
+}
+
+
+
+.container * {
+  -webkit-animation-play-state: paused !important;
+  animation-play-state: paused !important;
+} 
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  z-index: 200;
+  border-radius: 50%;
+}
+.bubble:nth-child(1) {
+  top: 8%;
+  left: 60%;
+
+  height: 11vmin;
+  width: 11vmin;
+  -webkit-animation: love-burst 3s infinite 0s;
+  animation: love-burst 3s infinite 0s;
+  box-shadow: inset 0 0 0 5.5vmin transparent;
+  -webkit-transform: translate(0, 0.05em) scale(0);
+  transform: translate(0, 0.05em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(2) {
+  top: 83%;
+  left: 14%;
+  height: 20vmin;
+  width: 20vmin;
+  -webkit-animation: love-burst 3s infinite 0.15s;
+  animation: love-burst 3s infinite 0.15s;
+  box-shadow: inset 0 0 0 10vmin transparent;
+  -webkit-transform: translate(0, 0.75em) scale(0);
+  transform: translate(0, 0.75em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(3) {
+  top: 25%;
+  left: 49%;
+  height: 4vmin;
+  width: 4vmin;
+  -webkit-animation: love-burst 3s infinite 0.3s;
+  animation: love-burst 3s infinite 0.3s;
+  box-shadow: inset 0 0 0 2vmin transparent;
+  -webkit-transform: translate(0, 0.5em) scale(0);
+  transform: translate(0, 0.5em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(4) {
+  top: 63%;
+  left: 93%;
+  height: 3vmin;
+  width: 3vmin;
+  -webkit-animation: love-burst 3s infinite 0.45s;
+  animation: love-burst 3s infinite 0.45s;
+  box-shadow: inset 0 0 0 1.5vmin transparent;
+  -webkit-transform: translate(0, 0.35em) scale(0);
+  transform: translate(0, 0.35em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(5) {
+  top: 7%;
+  left: 56%;
+  height: 18vmin;
+  width: 18vmin;
+  -webkit-animation: love-burst 3s infinite 0.6s;
+  animation: love-burst 3s infinite 0.6s;
+  box-shadow: inset 0 0 0 9vmin transparent;
+  -webkit-transform: translate(0, 0.3em) scale(0);
+  transform: translate(0, 0.3em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(6) {
+  top: 10%;
+  left: 68%;
+  height: 5vmin;
+  width: 5vmin;
+  -webkit-animation: love-burst 3s infinite 0.75s;
+  animation: love-burst 3s infinite 0.75s;
+  box-shadow: inset 0 0 0 2.5vmin transparent;
+  -webkit-transform: translate(0, 1.1em) scale(0);
+  transform: translate(0, 1.1em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(7) {
+  top: 68%;
+  left: 1%;
+  height: 5vmin;
+  width: 5vmin;
+  -webkit-animation: love-burst 3s infinite 0.9s;
+  animation: love-burst 3s infinite 0.9s;
+  box-shadow: inset 0 0 0 2.5vmin transparent;
+  -webkit-transform: translate(0, 0.15em) scale(0);
+  transform: translate(0, 0.15em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(8) {
+  top: 61%;
+  left: 51%;
+  height: 11vmin;
+  width: 11vmin;
+  -webkit-animation: love-burst 3s infinite 1.05s;
+  animation: love-burst 3s infinite 1.05s;
+  box-shadow: inset 0 0 0 5.5vmin transparent;
+  -webkit-transform: translate(0, 1.05em) scale(0);
+  transform: translate(0, 1.05em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(9) {
+  top: 24%;
+  left: 45%;
+  height: 11vmin;
+  width: 11vmin;
+  -webkit-animation: love-burst 3s infinite 1.2s;
+  animation: love-burst 3s infinite 1.2s;
+  box-shadow: inset 0 0 0 5.5vmin transparent;
+  -webkit-transform: translate(0, 1em) scale(0);
+  transform: translate(0, 1em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(10) {
+  top: 13%;
+  left: 10%;
+  height: 19vmin;
+  width: 19vmin;
+  -webkit-animation: love-burst 3s infinite 1.35s;
+  animation: love-burst 3s infinite 1.35s;
+  box-shadow: inset 0 0 0 9.5vmin transparent;
+  -webkit-transform: translate(0, 1em) scale(0);
+  transform: translate(0, 1em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(11) {
+  top: 76%;
+  left: 7%;
+  height: 14vmin;
+  width: 14vmin;
+  -webkit-animation: love-burst 3s infinite 1.5s;
+  animation: love-burst 3s infinite 1.5s;
+  box-shadow: inset 0 0 0 7vmin transparent;
+  -webkit-transform: translate(0, 0.1em) scale(0);
+  transform: translate(0, 0.1em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(12) {
+  top: 22%;
+  left: 8%;
+  height: 17vmin;
+  width: 17vmin;
+  -webkit-animation: love-burst 3s infinite 1.65s;
+  animation: love-burst 3s infinite 1.65s;
+  box-shadow: inset 0 0 0 8.5vmin transparent;
+  -webkit-transform: translate(0, 0.2em) scale(0);
+  transform: translate(0, 0.2em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(13) {
+  top: 23%;
+  left: 81%;
+  height: 16vmin;
+  width: 16vmin;
+  -webkit-animation: love-burst 3s infinite 1.8s;
+  animation: love-burst 3s infinite 1.8s;
+  box-shadow: inset 0 0 0 8vmin transparent;
+  -webkit-transform: translate(0, 0.1em) scale(0);
+  transform: translate(0, 0.1em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(14) {
+  top: 77%;
+  left: 88%;
+  height: 3vmin;
+  width: 3vmin;
+  -webkit-animation: love-burst 3s infinite 1.95s;
+  animation: love-burst 3s infinite 1.95s;
+  box-shadow: inset 0 0 0 1.5vmin transparent;
+  -webkit-transform: translate(0, 0.45em) scale(0);
+  transform: translate(0, 0.45em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(15) {
+  top: 41%;
+  left: 1%;
+  height: 9vmin;
+  width: 9vmin;
+  -webkit-animation: love-burst 3s infinite 2.1s;
+  animation: love-burst 3s infinite 2.1s;
+  box-shadow: inset 0 0 0 4.5vmin transparent;
+  -webkit-transform: translate(0, 0.05em) scale(0);
+  transform: translate(0, 0.05em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(16) {
+  top: 51%;
+  left: 51%;
+  height: 8vmin;
+  width: 8vmin;
+  -webkit-animation: love-burst 3s infinite 2.25s;
+  animation: love-burst 3s infinite 2.25s;
+  box-shadow: inset 0 0 0 4vmin transparent;
+  -webkit-transform: translate(0, 1.15em) scale(0);
+  transform: translate(0, 1.15em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(17) {
+  top: 37%;
+  left: 65%;
+  height: 11vmin;
+  width: 11vmin;
+  -webkit-animation: love-burst 3s infinite 2.4s;
+  animation: love-burst 3s infinite 2.4s;
+  box-shadow: inset 0 0 0 5.5vmin transparent;
+  -webkit-transform: translate(0, 0.2em) scale(0);
+  transform: translate(0, 0.2em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(18) {
+  top: 11%;
+  left: 83%;
+  height: 18vmin;
+  width: 18vmin;
+  -webkit-animation: love-burst 3s infinite 2.55s;
+  animation: love-burst 3s infinite 2.55s;
+  box-shadow: inset 0 0 0 9vmin transparent;
+  -webkit-transform: translate(0, 0.9em) scale(0);
+  transform: translate(0, 0.9em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(19) {
+  top: 64%;
+  left: 86%;
+  height: 12vmin;
+  width: 12vmin;
+  -webkit-animation: love-burst 3s infinite 2.7s;
+  animation: love-burst 3s infinite 2.7s;
+  box-shadow: inset 0 0 0 6vmin transparent;
+  -webkit-transform: translate(0, 0.65em) scale(0);
+  transform: translate(0, 0.65em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.bubble:nth-child(20) {
+  top: 39%;
+  left: 24%;
+  height: 19vmin;
+  width: 19vmin;
+  -webkit-animation: love-burst 3s infinite 2.85s;
+  animation: love-burst 3s infinite 2.85s;
+  box-shadow: inset 0 0 0 9.5vmin transparent;
+  -webkit-transform: translate(0, 0.2em) scale(0);
+  transform: translate(0, 0.2em) scale(0);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+
+@-webkit-keyframes love-burst {
+  50%,
+  100% {
+    box-shadow: inset 0 0 0 0 rgb(1, 175, 73);
+    -webkit-transform: translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes love-burst {
+  50%,
+  100% {
+    box-shadow: inset 0 0 0 0 rgb(211, 6, 177);
+    -webkit-transform: translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1);
+  }
+}
+.heart {
+  fill: transparent;
+  opacity: 0;
+}
+.bubble:nth-child(1) .heart {
+  -webkit-animation: love 3s forwards infinite 0s;
+  animation: love 3s forwards infinite 0s;
+  -webkit-transform: scale(0.5) rotate(-4deg);
+  transform: scale(0.5) rotate(-4deg);
+}
+.bubble:nth-child(2) .heart {
+  -webkit-animation: love 3s forwards infinite 0.15s;
+  animation: love 3s forwards infinite 0.15s;
+  -webkit-transform: scale(0.5) rotate(22deg);
+  transform: scale(0.5) rotate(22deg);
+}
+.bubble:nth-child(3) .heart {
+  -webkit-animation: love 3s forwards infinite 0.3s;
+  animation: love 3s forwards infinite 0.3s;
+  -webkit-transform: scale(0.5) rotate(-5deg);
+  transform: scale(0.5) rotate(-5deg);
+}
+.bubble:nth-child(4) .heart {
+  -webkit-animation: love 3s forwards infinite 0.45s;
+  animation: love 3s forwards infinite 0.45s;
+  -webkit-transform: scale(0.5) rotate(50deg);
+  transform: scale(0.5) rotate(50deg);
+}
+.bubble:nth-child(5) .heart {
+  -webkit-animation: love 3s forwards infinite 0.6s;
+  animation: love 3s forwards infinite 0.6s;
+  -webkit-transform: scale(0.5) rotate(-29deg);
+  transform: scale(0.5) rotate(-29deg);
+}
+.bubble:nth-child(6) .heart {
+  -webkit-animation: love 3s forwards infinite 0.75s;
+  animation: love 3s forwards infinite 0.75s;
+  -webkit-transform: scale(0.5) rotate(35deg);
+  transform: scale(0.5) rotate(35deg);
+}
+.bubble:nth-child(7) .heart {
+  -webkit-animation: love 3s forwards infinite 0.9s;
+  animation: love 3s forwards infinite 0.9s;
+  -webkit-transform: scale(0.5) rotate(-5deg);
+  transform: scale(0.5) rotate(-5deg);
+}
+.bubble:nth-child(8) .heart {
+  -webkit-animation: love 3s forwards infinite 1.05s;
+  animation: love 3s forwards infinite 1.05s;
+  -webkit-transform: scale(0.5) rotate(40deg);
+  transform: scale(0.5) rotate(40deg);
+}
+.bubble:nth-child(9) .heart {
+  -webkit-animation: love 3s forwards infinite 1.2s;
+  animation: love 3s forwards infinite 1.2s;
+  -webkit-transform: scale(0.5) rotate(-35deg);
+  transform: scale(0.5) rotate(-35deg);
+}
+.bubble:nth-child(10) .heart {
+  -webkit-animation: love 3s forwards infinite 1.35s;
+  animation: love 3s forwards infinite 1.35s;
+  -webkit-transform: scale(0.5) rotate(28deg);
+  transform: scale(0.5) rotate(28deg);
+}
+.bubble:nth-child(11) .heart {
+  -webkit-animation: love 3s forwards infinite 1.5s;
+  animation: love 3s forwards infinite 1.5s;
+  -webkit-transform: scale(0.5) rotate(-3deg);
+  transform: scale(0.5) rotate(-3deg);
+}
+.bubble:nth-child(12) .heart {
+  -webkit-animation: love 3s forwards infinite 1.65s;
+  animation: love 3s forwards infinite 1.65s;
+  -webkit-transform: scale(0.5) rotate(48deg);
+  transform: scale(0.5) rotate(48deg);
+}
+.bubble:nth-child(13) .heart {
+  -webkit-animation: love 3s forwards infinite 1.8s;
+  animation: love 3s forwards infinite 1.8s;
+  -webkit-transform: scale(0.5) rotate(-33deg);
+  transform: scale(0.5) rotate(-33deg);
+}
+.bubble:nth-child(14) .heart {
+  -webkit-animation: love 3s forwards infinite 1.95s;
+  animation: love 3s forwards infinite 1.95s;
+  -webkit-transform: scale(0.5) rotate(40deg);
+  transform: scale(0.5) rotate(40deg);
+}
+.bubble:nth-child(15) .heart {
+  -webkit-animation: love 3s forwards infinite 2.1s;
+  animation: love 3s forwards infinite 2.1s;
+  -webkit-transform: scale(0.5) rotate(-29deg);
+  transform: scale(0.5) rotate(-29deg);
+}
+.bubble:nth-child(16) .heart {
+  -webkit-animation: love 3s forwards infinite 2.25s;
+  animation: love 3s forwards infinite 2.25s;
+  -webkit-transform: scale(0.5) rotate(19deg);
+  transform: scale(0.5) rotate(19deg);
+}
+.bubble:nth-child(17) .heart {
+  -webkit-animation: love 3s forwards infinite 2.4s;
+  animation: love 3s forwards infinite 2.4s;
+  -webkit-transform: scale(0.5) rotate(-29deg);
+  transform: scale(0.5) rotate(-29deg);
+}
+.bubble:nth-child(18) .heart {
+  -webkit-animation: love 3s forwards infinite 2.55s;
+  animation: love 3s forwards infinite 2.55s;
+  -webkit-transform: scale(0.5) rotate(14deg);
+  transform: scale(0.5) rotate(14deg);
+}
+.bubble:nth-child(19) .heart {
+  -webkit-animation: love 3s forwards infinite 2.7s;
+  animation: love 3s forwards infinite 2.7s;
+  -webkit-transform: scale(0.5) rotate(-10deg);
+  transform: scale(0.5) rotate(-10deg);
+}
+.bubble:nth-child(20) .heart {
+  -webkit-animation: love 3s forwards infinite 2.85s;
+  animation: love 3s forwards infinite 2.85s;
+  -webkit-transform: scale(0.5) rotate(46deg);
+  transform: scale(0.5) rotate(46deg);
+}
+
+@-webkit-keyframes love {
+  50% {
+    fill: rgb(253, 66, 19);
+    opacity: 1;
+  }
+}
+
+@keyframes love {
+  50% {
+    fill: rgb(253, 93, 19);
+    opacity: 1;
+  }
+}
+</style>
+
+</head>
+<body>
+
+  <div class="bubbles">
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+    </div>
+    <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+        <title>heart22</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+<script>
+  const svg_terrain = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512px' height='512px' viewBox='0 0 512 512'%3E%3Cpath id='パス' fill='none' stroke='black' stroke-width='1' d='M 256.75,151.50 C 256.75,151.50 263.33,132.67 263.33,132.67 263.33,132.67 272.00,110.67 272.00,110.67 272.00,110.67 283.33,97.33 283.33,97.33 283.33,97.33 296.67,81.33 296.67,81.33 296.67,81.33 314.67,66.00 314.67,66.00 314.67,66.00 332.67,56.67 332.67,56.67 332.67,56.67 350.67,52.00 350.67,52.00 350.67,52.00 374.00,46.00 374.00,46.00 374.00,46.00 392.67,47.33 392.67,47.33 392.67,47.33 416.67,51.33 416.67,51.33 416.67,51.33 435.33,57.33 435.33,57.33 435.33,57.33 456.67,67.33 456.67,67.33 456.67,67.33 472.00,80.00 472.00,80.00 472.00,80.00 485.33,96.67 485.33,96.67 485.33,96.67 495.33,114.67 495.33,114.67 495.33,114.67 504.00,132.67 504.00,132.67 504.00,132.67 510.00,152.67 510.00,152.67 510.00,152.67 509.33,176.00 509.33,176.00 509.33,176.00 508.00,207.33 508.00,207.33 508.00,207.33 497.33,252.67 497.33,252.67 497.33,252.67 484.00,285.33 484.00,285.33 484.00,285.33 467.33,318.00 467.33,318.00 467.33,318.00 446.67,343.33 446.67,343.33 446.67,343.33 426.67,365.33 426.67,365.33 426.67,365.33 404.67,384.67 404.67,384.67 404.67,384.67 380.67,402.00 380.67,402.00 380.67,402.00 358.67,418.67 358.67,418.67 358.67,418.67 328.67,433.33 328.67,433.33 328.67,433.33 307.33,446.67 307.33,446.67 307.33,446.67 284.67,454.00 284.67,454.00 284.67,454.00 257.33,464.67 257.33,464.67 257.33,464.67 224.00,450.67 224.00,450.67 224.00,450.67 194.00,438.67 194.00,438.67 194.00,438.67 173.33,428.00 173.33,428.00 173.33,428.00 146.00,412.00 146.00,412.00 146.00,412.00 122.67,393.33 122.67,393.33 122.67,393.33 95.33,374.00 95.33,374.00 95.33,374.00 72.00,351.33 72.00,351.33 72.00,351.33 50.67,325.33 50.67,325.33 50.67,325.33 39.33,307.33 39.33,307.33 39.33,307.33 25.33,285.33 25.33,285.33 25.33,285.33 14.00,259.33 14.00,259.33 14.00,259.33 4.00,229.33 4.00,229.33 4.00,229.33 2.00,209.33 2.00,209.33 2.00,209.33 0.67,175.33 0.67,175.33 0.67,175.33 2.67,151.33 2.67,151.33 2.67,151.33 10.67,126.67 10.67,126.67 10.67,126.67 19.33,110.00 19.33,110.00 19.33,110.00 34.00,85.33 34.00,85.33 34.00,85.33 52.00,71.33 52.00,71.33 52.00,71.33 76.00,56.67 76.00,56.67 76.00,56.67 106.67,45.33 106.67,45.33 106.67,45.33 132.00,45.33 132.00,45.33 132.00,45.33 161.33,50.67 161.33,50.67 161.33,50.67 178.67,56.67 178.67,56.67 178.67,56.67 198.67,67.33 198.67,67.33 198.67,67.33 216.67,78.67 216.67,78.67 216.67,78.67 230.00,95.33 230.00,95.33 230.00,95.33 240.00,110.67 240.00,110.67 240.00,110.67 248.53,129.37 248.53,129.37 248.53,129.37 251.65,140.15 251.65,140.15 251.65,140.15 255.75,151.50 255.75,151.50 255.75,151.50 259.33,0.67 259.33,0.67 259.33,0.67 0.28,0.57 0.28,0.57 0.28,0.57 -0.85,511.81 -0.85,511.81 -0.85,511.81 511.52,511.81 511.52,511.81 511.52,511.81 512.00,-0.50 512.00,-0.50 512.00,-0.50 263.00,0.50 263.00,0.50 263.00,0.50 256.75,151.50 256.75,151.50 Z' /%3E%3C/svg%3E";
+  const svg_heart = "data:image/svg+xml,%3Csvg id='_x32_' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='512px' height='512px' viewBox='0 0 512 512' style='width: 512px; height: 512px; opacity: 1;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%234B4B4B;%7D %3C/style%3E%3Cg%3E%3Cpath class='st0' d='M384,46.469c-70.688,0-128,57.313-128,128.016c0-70.703-57.313-128.016-128-128.016S0,103.781,0,174.484 c0,66.484,31.313,193.391,218.563,276.234c11.844,5.25,35.703,14.469,35.703,14.469c0.547,0.219,1.141,0.344,1.734,0.344 s1.188-0.125,1.734-0.344c0,0,23.859-9.219,35.703-14.469C480.688,367.875,512,240.969,512,174.484 C512,103.781,454.688,46.469,384,46.469z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E";
+</script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js'></script>
+<script>
+	
+"use strict";
+
+!(function () {
+  function t() {
+    !(function () {
+      var t, g;
+      if (
+        ((o = l / 2),
+        (a = s / 2),
+        (n = c.create()),
+        (e = n.world),
+        (r = d.create({
+          element: document.body,
+          engine: n,
+          options: {
+            width: l,
+            height: s,
+            wireframes: !1,
+            background: "transparent",
+            pixelRatio: 1
+          }
+        })),
+        (i = u.create()),
+        u.run(i, n),
+        (n.gravity.scale = 0),
+        (n.gravity.x = 0),
+        (n.gravity.y = 0),
+        "undefined" != typeof fetch)
+      ) {
+        (t = function (t, e) {
+          return Array.prototype.slice.call(t.querySelectorAll(e));
+        }),
+          (g = function (t) {
+            return fetch(t)
+              .then(function (t) {
+                return t.text();
+              })
+              .then(function (t) {
+                return new window.DOMParser().parseFromString(
+                  t,
+                  "image/svg+xml"
+                );
+              });
+          })(svg_terrain).then(function (n) {
+            var r = t(n, "path"),
+              i = r.map(function (t) {
+                return v.pathToVertices(t, 30);
+              }),
+              l = y.fromVertices(
+                256,
+                200,
+                i,
+                {
+                  isStatic: !0,
+                  render: {
+                    fillStyle: "transparent",
+                    strokeStyle: "transparent",
+                    lineWidth: 1
+                  }
+                },
+                !0
+              );
+            h.add(e, l), (o = l.position.x), (a = l.position.y);
+          });
+        let n = null,
+          r = null;
+        g(svg_heart).then(function (e) {
+          n ||
+            ((r = t(e, "path").map(function (t) {
+              return v.pathToVertices(t, 50);
+            })),
+            (n = y.fromVertices(
+              o,
+              1.5 * a,
+              r,
+              {
+                restitution: 0,
+                friction: 0,
+                frictionStatic: 0,
+                frictionAir: 0,
+                mass: 20,
+                render: {
+                  lineWidth: 2
+                }
+              },
+              !0
+            )),
+            M.scale(n, 0.2, 0.2));
+        });
+        let i = function () {
+          let t = structuredClone(n);
+          (t.id = f.nextId()),
+            (t.position.x = o),
+            (t.position.y = 1.5 * a),
+            S.push(S.shift());
+          let r = S[0];
+          (t.render.fillStyle = r),
+            (t.render.strokeStyle = r),
+            t.parts.forEach(function (e, n) {
+              (t.parts[n].render.fillStyle = r),
+                (t.parts[n].render.strokeStyle = r);
+            }),
+            M.setAngle(t, Math.round(360 * Math.random()), !1),
+            M.setVelocity(t, {
+              x: f.random(-5, 5),
+              y: f.random(-5, -1)
+            }),
+            h.add(e, t);
+        };
+        setTimeout(function () {
+          let t = 0,
+            e = setInterval(() => {
+              i(), 2 == t && (clearInterval(e), (n = null), (r = null)), t++;
+            }, 780);
+        }, 220);
+      } else f.warn("Fetch is not available. Could not load SVG.");
+      let k = m.create(r.canvas),
+        x = p.create(n, {
+          mouse: k,
+          constraint: {
+            stiffness: 0.2,
+            render: {
+              visible: !1
+            }
+          }
+        });
+      h.add(e, x),
+        (r.mouse = k),
+        d.lookAt(r, {
+          min: {
+            x: 0,
+            y: 0
+          },
+          max: {
+            x: l,
+            y: s
+          }
+        }),
+        d.run(r);
+    })();
+  }
+  let e,
+    n,
+    r,
+    i,
+    o,
+    a,
+    l = 512,
+    s = 512,
+    c = (Matter.World, Matter.Engine),
+    d = Matter.Render,
+    u = Matter.Runner,
+    f = (Matter.Composites, Matter.Common),
+    p = Matter.MouseConstraint,
+    m = Matter.Mouse,
+    h = Matter.Composite,
+    y = (Matter.Vertices, Matter.Bodies),
+    M = Matter.Body,
+    v = (Matter.Events, Matter.Query, Matter.Svg),
+    g = [
+      "pink",
+      "deeppink",
+      "deeppink",
+      "hotpink",
+      "hotpink",
+      "lightpink",
+      "magenta",
+      "orchid"
+    ],
+    S = ["mediumvioletred", "crimson", "salmon"];
+  (window.onload = () => {
+    t();
+  }),
+    setTimeout(function () {
+      let t = 0,
+        n = setInterval(() => {
+          !(function () {
+            let t = f.choose(g);
+            const n = y.circle(o, a, 25, {
+              restitution: 0,
+              friction: 0,
+              frictionStatic: 0,
+              frictionAir: 0,
+              mass: 10,
+              render: {
+                fillStyle: t,
+                strokeStyle: t,
+                lineWidth: 0
+              }
+            });
+            M.setVelocity(n, {
+              x: f.random(-1, 1),
+              y: f.random(-1, 1)
+            }),
+              h.add(e, n);
+          })(),
+            60 == t && clearInterval(n),
+            t++;
+        }, 100);
+    }, 2e3);
+})();
+</script>
+</body>
+</html>
