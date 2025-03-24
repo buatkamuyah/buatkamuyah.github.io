@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek IP dan Lokasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #ip-box {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .manual-check {
+            margin-top: 20px;
+        }
+        .manual-check input {
+            padding: 5px;
+            width: 200px;
+        }
+        .manual-check button {
+            padding: 5px 10px;
+        }
+        .result-box {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Kotak kecil untuk menampilkan IP di sudut kanan atas -->
+    <div id="ip-box">IP: Loading...</div>
+
+    <h1>Informasi IP Anda</h1>
+    <div class="result-box">
+        <p><strong>IP Address:</strong> <span id="ip"></span></p>
+        <p><strong>Negara:</strong> <span id="country"></span></p>
+        <p><strong>Kota:</strong> <span id="city"></span></p>
+        <p><strong>ISP:</strong> <span id="isp"></span></p>
+        <p><strong>Browser:</strong> <span id="browser"></span></p>
+        <p><strong>Perangkat:</strong> <span id="device"></span></p>
+    </div>
+
+    <hr>
+
+    <!-- Form untuk mengecek IP secara manual -->
+    <div class="manual-check">
+        <h2>Cek IP Manual</h2>
+        <input type="text" id="manual-ip" placeholder="Masukkan IP (misal: 8.8.8.8)">
+        <button onclick="checkManualIP()">Cek</button>
+        <div id="manual-result-box" class="result-box" style="display: none;">
+            <p><strong>IP Address:</strong> <span id="manual-ip-result"></span></p>
+            <p><strong>Negara:</strong> <span id="manual-country"></span></p>
+            <p><strong>Kota:</strong> <span id="manual-city"></span></p>
+            <p><strong>ISP:</strong> <span id="manual-isp"></span></p>
+        </div>
+    </div>
+
+    <script>
+        async function getIPInfo(ip = "") {
+            try {
+                let url = ip ? `http://ip-api.com/json/${ip}` : 'http://ip-api.com/json/';
+                let res = await fetch(url);
+                let data = await res.json();
+                
+                if (!ip) {
+                    // Update info otomatis
+                    document.getElementById('ip').textContent = data.query;
+                    document.getElementById('country').textContent = data.country;
+                    document.getElementById('city').textContent = data.city;
+                    document.getElementById('isp').textContent = data.isp;
+
+                    // Update kotak kecil di sudut kanan atas
+                    document.getElementById('ip-box').textContent = "IP: " + data.query;
+
+                    // Deteksi browser
+                    let userAgent = navigator.userAgent;
+                    document.getElementById('browser').textContent = userAgent.includes("Chrome") ? "Google Chrome" : 
+                        userAgent.includes("Firefox") ? "Mozilla Firefox" : 
+                        userAgent.includes("Safari") ? "Safari" : "Browser Lain";
+
+                    // Deteksi perangkat
+                    document.getElementById('device').textContent = /Mobi|Android/i.test(userAgent) ? "Mobile" : "Desktop";
+                } else {
+                    // Hasil pencarian manual
+                    document.getElementById('manual-ip-result').textContent = data.query;
+                    document.getElementById('manual-country').textContent = data.country;
+                    document.getElementById('manual-city').textContent = data.city;
+                    document.getElementById('manual-isp').textContent = data.isp;
+
+                    // Tampilkan hasil manual
+                    document.getElementById('manual-result-box').style.display = "block";
+                }
+
+            } catch (error) {
+                console.error("Gagal mengambil data IP", error);
+                if (ip) {
+                    document.getElementById('manual-result-box').style.display = "block";
+                    document.getElementById('manual-ip-result').textContent = "IP tidak valid atau tidak ditemukan.";
+                    document.getElementById('manual-country').textContent = "-";
+                    document.getElementById('manual-city').textContent = "-";
+                    document.getElementById('manual-isp').textContent = "-";
+                }
+            }
+        }
+
+        function checkManualIP() {
+            let manualIP = document.getElementById('manual-ip').value.trim();
+            if (manualIP) {
+                getIPInfo(manualIP);
+            } else {
+                alert("Masukkan IP terlebih dahulu!");
+            }
+        }
+
+        // Jalankan fungsi saat halaman dimuat untuk menampilkan IP otomatis
+        getIPInfo();
+    </script>
+
+</body>
+</html>
